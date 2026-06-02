@@ -4714,7 +4714,7 @@ function printPDF() {
   var pageHTML = '<!DOCTYPE html>' + clone.outerHTML;
 
   // Send to server
-  fetch('https://dental-pdf-service.onrender.com/generate-pdf', {
+  fetch('https://adt-pdf-server.onrender.com/generate-pdf', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ html: pageHTML })
