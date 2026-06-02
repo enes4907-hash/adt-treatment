@@ -4706,6 +4706,11 @@ function printPDF() {
   clone.querySelectorAll('.advisor-menu').forEach(function(el){ el.remove(); });
   clone.querySelectorAll('.advisor-arrow').forEach(function(el){ el.remove(); });
 
+  // Remove all scripts from the clone so the page JS does NOT re-run on the
+  // PDF server (which would reset the language back to English). The translated
+  // text is already baked into the cloned DOM, so no JS is needed for the PDF.
+  clone.querySelectorAll('script').forEach(function(s){ s.remove(); });
+
   var pageHTML = '<!DOCTYPE html>' + clone.outerHTML;
 
   // Send to server
