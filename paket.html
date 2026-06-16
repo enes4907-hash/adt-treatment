@@ -704,9 +704,312 @@ body.pdf-mode .doctor-hint{display:none !important;}
   font-size:13.5px; font-weight:500; z-index:210; box-shadow:0 10px 24px rgba(30,132,73,0.4);
 }
 #successToast.show{ display:block; }
+
+
+/* =====================================================================
+   PREMIUM LUXURY SKIN — "Engraved Champagne" identity
+   Signature: gold double-rule frames + corner ornaments + medallion seal
+   © Aesthetic Dental Turkey | ADT-7C85E017B12082C2
+   ===================================================================== */
+:root{
+  --lux-ivory-1:#FCFAF4;
+  --lux-ivory-2:#F4EEE1;
+  --lux-ivory-3:#ECE3D1;
+  --lux-espresso:#2A2419;
+  --lux-soft:#6E6354;
+  --lux-gold:#A87E32;
+  --lux-gold-deep:#856226;
+  --lux-gold-light:#C9A24B;
+  --lux-gold-bright:#E4C673;
+  --lux-line:rgba(133,98,38,0.28);
+  --lux-line-soft:rgba(133,98,38,0.16);
+  --lux-card:#FFFFFF;
+  --lux-shadow:0 28px 56px -22px rgba(74,56,22,0.30), 0 8px 20px -10px rgba(74,56,22,0.16);
+  --lux-shadow-sm:0 12px 26px -14px rgba(74,56,22,0.22);
+}
+.lux-foil{
+  background:linear-gradient(135deg,#E4C673 0%,#C9A24B 28%,#A87E32 55%,#856226 78%,#D8B45E 100%);
+}
+
+/* ---- Page background: warm ivory with a soft gold vignette ---- */
+body{
+  background:
+    radial-gradient(1200px 560px at 50% -12%, rgba(168,126,50,0.12), transparent 58%),
+    radial-gradient(900px 500px at 50% 108%, rgba(168,126,50,0.07), transparent 60%),
+    linear-gradient(180deg,#FCFAF4 0%, #F5EFE2 52%, #EFE7D6 100%) !important;
+  color:var(--lux-espresso);
+}
+
+/* =================== HEADER =================== */
+.pk-header{ padding:46px 22px 8px; }
+/* Monogram -> engraved medallion seal */
+.pk-mono{ gap:16px; margin-bottom:20px; }
+.pk-mono .ml, .pk-mono .mr{ width:38px; height:1px; opacity:0.7;
+  background:linear-gradient(90deg,transparent,var(--lux-gold)); }
+.pk-mono .mr{ background:linear-gradient(90deg,var(--lux-gold),transparent); }
+.pk-mono .t{
+  font-family:'Playfair Display',serif; font-size:15px; letter-spacing:0.30em;
+  color:var(--lux-gold-deep); font-weight:700; padding-left:0.30em;
+  width:58px; height:58px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle at 50% 35%, #FFFDF7, #F4EBD7);
+  border:1px solid var(--lux-gold);
+  box-shadow:0 0 0 4px #FFFDF8, 0 0 0 5px var(--lux-line), 0 10px 22px -10px rgba(133,98,38,0.55), inset 0 1px 3px rgba(255,255,255,0.9);
+}
+.pk-clinic{ font-size:27px; letter-spacing:0.12em; color:var(--lux-espresso); }
+.pk-clinic-sub{ color:var(--lux-gold-deep); opacity:0.92; margin-top:8px; }
+
+/* Flourish divider (diamond + tapering lines) */
+.pk-div{
+  width:128px; height:9px; opacity:1; position:relative;
+  margin:24px auto 18px;
+  background:radial-gradient(circle, var(--lux-gold) 0 3.2px, transparent 3.4px) center/10px 10px no-repeat !important;
+}
+.pk-div::before, .pk-div::after{
+  content:''; position:absolute; top:50%; width:46px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--lux-gold));
+}
+.pk-div::before{ left:0; }
+.pk-div::after{ right:0; background:linear-gradient(90deg,var(--lux-gold),transparent); }
+/* center diamond via box */
+.pk-eyebrow, .pk-pkg-eyebrow{
+  color:var(--lux-gold-deep); letter-spacing:0.30em; font-weight:700; font-size:11px;
+}
+
+/* package name dropdown — engraved */
+.pk-pkg-select{
+  font-size:31px; color:var(--lux-espresso);
+  border-bottom:1px solid var(--lux-line); padding:2px 10px 5px;
+}
+.pk-pkg-arrow{ color:var(--lux-gold); }
+.pk-pkg-menu{ border-color:var(--lux-line); box-shadow:var(--lux-shadow-sm); }
+.pk-pkg-menu span{ color:var(--lux-espresso); border-bottom-color:var(--lux-line-soft); }
+.pk-pkg-menu span:hover{ background:#FBF6EA; color:var(--lux-gold-deep); }
+
+.pk-meta .k{ color:var(--lux-soft); }
+.pk-meta .v{ color:var(--lux-gold-deep); border-bottom-color:var(--lux-line); }
+
+/* =================== CARDS: engraved gold frame =================== */
+.pk-card{
+  position:relative;
+  background:linear-gradient(180deg,#FFFFFF,#FFFDF8);
+  border:1px solid var(--lux-line);
+  border-radius:16px;
+  box-shadow:var(--lux-shadow);
+  padding:30px 16px 22px;
+  margin:26px 16px;
+}
+/* inner engraved rule */
+.pk-card::before{
+  content:''; position:absolute; inset:7px; border-radius:11px;
+  border:1px solid var(--lux-line-soft); pointer-events:none;
+}
+/* corner ornaments (4 gold diamonds at inner-frame corners) */
+.pk-card::after{
+  content:''; position:absolute; inset:7px; pointer-events:none;
+  background-image:
+    linear-gradient(45deg, var(--lux-gold) 0 100%),
+    linear-gradient(45deg, var(--lux-gold) 0 100%),
+    linear-gradient(45deg, var(--lux-gold) 0 100%),
+    linear-gradient(45deg, var(--lux-gold) 0 100%);
+  background-size:5px 5px; background-repeat:no-repeat;
+  background-position:top left, top right, bottom left, bottom right;
+  transform:none;
+}
+
+/* =================== ORNAMENTAL SECTION DIVIDER =================== */
+.pk-section-eyebrow{ color:var(--lux-gold-deep); letter-spacing:0.28em; font-weight:700; margin-top:34px; }
+.pk-section-line{
+  width:108px; height:8px; margin:12px auto 0; position:relative;
+  background:radial-gradient(circle, var(--lux-gold) 0 2.8px, transparent 3px) center/9px 9px no-repeat !important;
+}
+.pk-section-line::before, .pk-section-line::after{
+  content:''; position:absolute; top:50%; width:38px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--lux-gold)); opacity:0.7;
+}
+.pk-section-line::before{ left:0; }
+.pk-section-line::after{ right:0; background:linear-gradient(90deg,var(--lux-gold),transparent); }
+
+/* =================== TOOTH CHART =================== */
+.tooth-chart-section{ background:none; box-shadow:none; border:none; }
+.jaw-label{ color:var(--lux-soft); letter-spacing:0.2em; }
+.num-cell{ color:#9A8E6F; }
+
+/* =================== TABLE =================== */
+.t-table{ border:none; box-shadow:none; background:none; }
+.t-head-row{
+  background:linear-gradient(180deg,#F6EFDF,#F1E7D2);
+  border-radius:9px; border:1px solid var(--lux-line-soft);
+}
+.t-head-cell{ color:var(--lux-gold-deep); letter-spacing:0.13em; font-weight:700; }
+.t-row{ border-bottom:1px solid var(--lux-line-soft); }
+.t-name{ color:var(--lux-espresso); font-weight:600; }
+.t-price{ color:var(--lux-gold-deep); font-weight:600; }
+.t-sub, .opt-label, .name-label{ color:var(--lux-soft); }
+.t-qty.ed, .t-unit.ed, .t-name-select{ border-bottom-color:var(--lux-line); }
+.t-option-menu{ border-color:var(--lux-line); box-shadow:var(--lux-shadow-sm); }
+.t-option-menu span:hover{ background:#FBF6EA; color:var(--lux-gold-deep); }
+
+/* =================== PRICE — the signature centerpiece =================== */
+.pk-price-wrap{ margin:34px 18px 8px; }
+.pk-std-price{
+  background:#FFFDF8; border:1px solid var(--lux-line-soft); border-radius:13px;
+  box-shadow:var(--lux-shadow-sm); padding:15px;
+}
+.pk-std-label{ color:var(--lux-soft); letter-spacing:0.22em; }
+.pk-std-amount{ color:#A99B7F; }
+.pk-price-arrow{ color:var(--lux-gold); }
+
+.pk-price{
+  position:relative; border:none; border-radius:18px; padding:0;
+  background:linear-gradient(135deg,#E4C673,#C9A24B 32%,#A87E32 60%,#856226 82%,#D8B45E);
+  box-shadow:0 26px 54px -20px rgba(133,98,38,0.55), 0 0 0 1px rgba(133,98,38,0.20);
+}
+.pk-price-in{
+  margin:3px; border-radius:15px; border:1px solid rgba(133,98,38,0.25);
+  background:radial-gradient(120% 100% at 50% 0%, #FFFEFA, #FBF5E9);
+  padding:30px 18px 26px;
+}
+.pk-price-eyebrow{ color:var(--lux-gold-deep); letter-spacing:0.30em; font-weight:700; }
+.pk-price-amount{ color:var(--lux-espresso); font-size:55px; }
+.pk-price-sub{ color:var(--lux-gold-deep); }
+
+/* savings — deep emerald, gold-edged */
+.pk-savings{
+  background:linear-gradient(135deg,#1E6E4A,#27935F);
+  box-shadow:0 14px 28px -12px rgba(30,110,74,0.5), 0 0 0 1px rgba(228,198,115,0.35);
+  padding:12px 28px;
+}
+.pk-savings-amount{ color:#FFFFFF; }
+
+/* =================== JOURNEY =================== */
+.pk-journey-card{ padding:28px 16px 14px; }
+.jt-btn{ border-color:var(--lux-line); background:#FBF6EA; color:var(--lux-gold-deep); }
+.jt-btn.active{
+  background:linear-gradient(135deg,#C9A24B,#A87E32 60%,#856226);
+  color:#FFFDF7; border-color:transparent;
+  box-shadow:0 8px 18px -8px rgba(133,98,38,0.6);
+}
+.timeline::before{ background:linear-gradient(180deg,var(--lux-gold),rgba(168,126,50,0.12)); }
+.tl-dot{
+  background:radial-gradient(circle at 50% 35%, #FFFDF7, #F4EBD7);
+  border:1.5px solid var(--lux-gold); color:var(--lux-gold-deep);
+  box-shadow:0 0 0 3px #FFFDF8, 0 6px 14px -7px rgba(133,98,38,0.5);
+}
+.tl-card{ background:#FFFDF8; border:1px solid var(--lux-line-soft); box-shadow:var(--lux-shadow-sm); }
+.tl-type{ color:var(--lux-gold-deep); }
+.tl-dur{ color:var(--lux-espresso); border-bottom-color:var(--lux-line); }
+.tl-detail{ color:var(--lux-soft); }
+
+/* =================== FOOTER =================== */
+.pk-foot .l{ background:var(--lux-gold); opacity:0.55; }
+.pk-foot .t1{ color:var(--lux-soft); letter-spacing:0.24em; }
+.pk-foot .t2{ color:var(--lux-gold-deep); }
+
+/* =================== FAB / OVERLAY =================== */
+#saveFab{
+  background:linear-gradient(135deg,#C9A24B,#A87E32 58%,#856226) !important;
+  color:#FFFDF7 !important;
+  box-shadow:0 14px 30px -10px rgba(133,98,38,0.6) !important;
+}
+#genOverlay{ background:rgba(252,250,244,0.95); }
+.spin{ border-top-color:var(--lux-gold); border-color:rgba(168,126,50,0.25); border-top-color:var(--lux-gold); }
+#genOverlay .gt{ color:var(--lux-espresso); }
+
+/* language switcher */
+.lang-globe{ border-color:var(--lux-line); box-shadow:var(--lux-shadow-sm); }
+.lang-globe svg{ stroke:var(--lux-gold-deep); }
+#langMenu{ border-color:var(--lux-line); box-shadow:var(--lux-shadow-sm); }
+#langMenu span:hover{ background:#FBF6EA; color:var(--lux-gold-deep); }
+
+
+
+/* =====================================================================
+   PREMIUM SKIN v2 — bolder, more visibly luxurious touches
+   ===================================================================== */
+
+/* (1) Top metallic gold bar across the very top — instant signal */
+body{ position:relative; }
+.lux-topbar{
+  position:fixed; top:0; left:50%; transform:translateX(-50%);
+  width:100%; max-width:430px; height:4px; z-index:120; pointer-events:none;
+  background:linear-gradient(90deg,#856226,#E4C673 30%,#A87E32 55%,#E4C673 78%,#856226);
+}
+
+/* (2) Subtle guilloché weave texture on the page (faint gold diagonal lines) */
+body{
+  background:
+    repeating-linear-gradient(45deg, rgba(168,126,50,0.030) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-45deg, rgba(168,126,50,0.022) 0 1px, transparent 1px 11px),
+    radial-gradient(1200px 560px at 50% -12%, rgba(168,126,50,0.13), transparent 58%),
+    radial-gradient(900px 500px at 50% 108%, rgba(168,126,50,0.07), transparent 60%),
+    linear-gradient(180deg,#FCFAF4 0%, #F5EFE2 52%, #EFE7D6 100%) !important;
+}
+
+/* (3) Ornamental gold corner brackets framing the HERO header */
+.pk-header{ position:relative; }
+.pk-header::before, .pk-header::after{
+  content:''; position:absolute; top:14px; width:26px; height:26px; pointer-events:none;
+  border-top:2px solid var(--lux-gold); 
+}
+.pk-header::before{ left:12px; border-left:2px solid var(--lux-gold); border-top-left-radius:5px; }
+.pk-header::after{ right:12px; border-right:2px solid var(--lux-gold); border-top-right-radius:5px; }
+
+/* small flourish under the medallion */
+.pk-mono{ position:relative; }
+
+/* (4) More ornate section dividers — flanking diamonds */
+.pk-section-line::before, .pk-section-line::after{
+  box-shadow:14px 0 0 -2.2px var(--lux-gold);
+}
+.pk-section-line::after{ box-shadow:-14px 0 0 -2.2px var(--lux-gold); }
+
+/* eyebrow flanking mini-diamonds */
+.pk-section-eyebrow{ position:relative; display:inline-block; left:50%; transform:translateX(-50%); padding:0 26px; }
+.pk-section-eyebrow::before, .pk-section-eyebrow::after{
+  content:''; position:absolute; top:50%; margin-top:-2.5px; width:5px; height:5px;
+  background:var(--lux-gold); transform:rotate(45deg);
+}
+.pk-section-eyebrow::before{ left:6px; }
+.pk-section-eyebrow::after{ right:6px; }
+
+/* (5) Shimmer sweep across the gold-foil price box */
+.pk-price{ overflow:hidden; }
+.pk-price::after{
+  content:''; position:absolute; top:0; left:-65%; width:45%; height:100%;
+  background:linear-gradient(110deg, transparent, rgba(255,255,255,0.55) 50%, transparent);
+  transform:skewX(-18deg); pointer-events:none; z-index:2;
+  animation:luxSheen 6s ease-in-out infinite;
+}
+@keyframes luxSheen{ 0%{left:-65%;} 8%{left:-65%;} 60%{left:140%;} 100%{left:140%;} }
+
+/* (6) Cards & price gently rise in on load */
+.pk-card, .pk-price-wrap{ animation:luxRise 0.7s cubic-bezier(.2,.7,.2,1) both; }
+.pk-card:nth-of-type(2){ animation-delay:0.05s; }
+@keyframes luxRise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+
+/* (7) Hover lift on cards (desktop) */
+.pk-card{ transition:box-shadow .25s, transform .25s; }
+.pk-card:hover{ transform:translateY(-2px); box-shadow:0 34px 64px -22px rgba(74,56,22,0.34), 0 10px 24px -10px rgba(74,56,22,0.20); }
+
+/* (8) Price eyebrow gets little crown-dots; bigger letter spacing */
+.pk-price-eyebrow{ letter-spacing:0.34em; }
+
+/* (9) Date & package underline become subtle gold gradient */
+.pk-pkg-select{ border-bottom:1px solid transparent; 
+  background-image:linear-gradient(90deg,transparent,var(--lux-gold),transparent);
+  background-size:100% 1px; background-position:0 100%; background-repeat:no-repeat; }
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .pk-price::after{ animation:none; display:none; }
+  .pk-card, .pk-price-wrap{ animation:none; }
+}
+
 </style>
 </head>
 <body data-adt-id="ADT-7C85E017B12082C2" data-adt-owner="aesthetic-dental-turkey">
+<div class="lux-topbar"></div>
 
 <div id="langSwitcher">
   <div class="lang-globe" onclick="toggleLangMenu(event)">
@@ -2247,6 +2550,13 @@ function printPDF(){
   clone.querySelectorAll('.t-option .arrow, .t-name-select .arrow').forEach(function(e){ e.remove(); });
   clone.querySelectorAll('.t-option, .t-name-select').forEach(function(el){ el.style.borderBottom='none'; el.style.cursor='default'; });
   clone.querySelectorAll('script').forEach(function(s){ s.remove(); });
+
+  // PDF: freeze/hide decorative motion so output is clean
+  try {
+    var _pdfStyle = document.createElement('style');
+    _pdfStyle.textContent = '.pk-price::after{display:none !important;} .lux-topbar{display:none !important;} *{animation:none !important;}';
+    var _h = clone.querySelector('head'); if(_h) _h.appendChild(_pdfStyle);
+  } catch(e){}
 
   var pageHTML='<!DOCTYPE html>'+clone.outerHTML;
 
