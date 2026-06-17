@@ -87,6 +87,54 @@ body{
   font-size:10.5px; font-weight:600; letter-spacing:0.26em; text-transform:uppercase;
   color:var(--gold); margin-bottom:2px;
 }
+
+/* =================== TIER SELECTOR (Silver / Gold / Premium) =================== */
+
+/* tier heading + selected pill */
+.pk-tiers-label{
+  text-align:center; font-size:10px; font-weight:700; letter-spacing:0.28em;
+  text-transform:uppercase; color:var(--lux-gold-deep); margin:2px 0 6px;
+}
+.pk-tier{ border-radius:30px; }
+.pk-tier.selected{
+  background:linear-gradient(180deg,#FFFFFF,#FBF5E9);
+  box-shadow:0 6px 16px -8px rgba(133,98,38,0.45), inset 0 0 0 1px var(--lux-line);
+  padding:6px 14px;
+}
+.pk-tiers{
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  margin:6px auto 4px; flex-wrap:nowrap;
+}
+.pk-tier{
+  display:flex; align-items:center; gap:7px; cursor:pointer; padding:4px 6px;
+  transform:scale(0.88); opacity:0.46; filter:grayscale(0.7);
+  transition:transform .28s cubic-bezier(.2,.7,.2,1), opacity .28s, filter .28s;
+}
+.pk-tier-emblem{
+  width:15px; height:15px; border-radius:50%; flex:0 0 15px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.22), inset 0 1px 1px rgba(255,255,255,0.5);
+  transition:width .28s, height .28s, flex-basis .28s, box-shadow .28s;
+}
+.pk-tier-label{
+  font-family:'Playfair Display',serif; font-size:14px; font-weight:600;
+  letter-spacing:0.10em; color:#6E6354; transition:font-size .28s, color .28s;
+}
+.pk-tier-sep{ width:1px; height:16px; background:var(--lux-line); opacity:0.6; }
+
+/* emblem colors per tier */
+.tier-silver  .pk-tier-emblem{ background:radial-gradient(circle at 35% 30%, #FFFFFF, #D9DBDF 45%, #9CA0A6 100%); border:1px solid #B6B9BE; }
+.tier-gold    .pk-tier-emblem{ background:radial-gradient(circle at 35% 30%, #F6E6B4, #DCBB60 45%, #A87E32 100%); border:1px solid #C9A24B; }
+.tier-premium .pk-tier-emblem{ background:radial-gradient(circle at 35% 30%, #7FB3E6, #2E6FB8 50%, #1A4C8C 100%); border:1px solid #2E6FB8; }
+
+/* selected: grows + full color, others stay faded/grey */
+.pk-tier.selected{ transform:scale(1.18); opacity:1; filter:none; }
+.pk-tier.selected .pk-tier-emblem{ width:21px; height:21px; flex-basis:21px;
+  box-shadow:0 4px 9px rgba(0,0,0,0.28), inset 0 1px 2px rgba(255,255,255,0.6); }
+.pk-tier.selected .pk-tier-label{ font-size:17px; }
+.tier-silver.selected  .pk-tier-label{ color:#8A8D93; }
+.tier-gold.selected    .pk-tier-label{ color:var(--lux-gold-deep); }
+.tier-premium.selected .pk-tier-label{ color:#1A4C8C; }
+
 .pk-pkg-select{
   display:inline-flex; align-items:center; gap:10px;
   font-family:'Playfair Display',serif; font-style:italic; font-size:30px; font-weight:500;
@@ -1027,10 +1075,26 @@ body{
   <div class="pk-clinic">Aesthetic Dental Turkey</div>
   <div class="pk-clinic-sub">Özel ADT Ağız ve Diş Sağlığı Polikliniği</div>
   <div class="pk-div"></div>
-  <div class="pk-pkg-eyebrow" data-i18n="pkg.eyebrow">EXCLUSIVE PACKAGE PRICES</div>
-  <div class="pk-pkg-select" id="pkgSelect" onclick="togglePkgMenu(event)">
-    <span class="pk-pkg-name" id="pkgName" data-pkg-key="allon6">Premium All-on-6 Package</span>
-    <span class="pk-pkg-arrow">&#9662;</span>
+  <div class="pk-tiers-label" data-i18n="tier.heading">YOUR PACKAGE</div>
+  <div class="pk-tiers" id="pkTiers">
+    <div class="pk-tier tier-silver" data-tier="silver" onclick="pickTier(this)">
+      <span class="pk-tier-emblem"></span>
+      <span class="pk-tier-label" data-i18n="tier.silver">Silver</span>
+    </div>
+    <div class="pk-tier-sep"></div>
+    <div class="pk-tier tier-gold selected" data-tier="gold" onclick="pickTier(this)">
+      <span class="pk-tier-emblem"></span>
+      <span class="pk-tier-label" data-i18n="tier.gold">Gold</span>
+    </div>
+    <div class="pk-tier-sep"></div>
+    <div class="pk-tier tier-premium" data-tier="premium" onclick="pickTier(this)">
+      <span class="pk-tier-emblem"></span>
+      <span class="pk-tier-label" data-i18n="tier.premium">Premium</span>
+    </div>
+  </div>
+  <div class="pk-pkg-select" id="pkgSelect">
+    <span class="pk-pkg-name" id="pkgName" data-pkg-key="allon6" contenteditable="true" spellcheck="false" oninput="pkgNameEdited()">Premium All-on-6 Package</span>
+    <span class="pk-pkg-arrow" onclick="togglePkgMenu(event)">&#9662;</span>
   </div>
   <div class="pk-pkg-menu" id="pkgMenu">
     <span data-pkg-key="allon6" onclick="pickPkg(this)">Premium All-on-6 Package</span>
@@ -1038,6 +1102,10 @@ body{
     <span data-pkg-key="makeover" onclick="pickPkg(this)">Premium Smile Makeover Package</span>
   </div>
   <div class="pk-meta">
+    <div class="m">
+      <div class="k" data-i18n="pkg.preparedFor">Prepared For</div>
+      <span class="v" id="pkName" contenteditable="true" spellcheck="false" data-ph="1">Patient Name</span>
+    </div>
     <div class="m">
       <div class="k" data-i18n="pkg.date">Date</div>
       <span class="v" id="pkDate" contenteditable="true" spellcheck="false">DD.MM.YYYY</span>
@@ -1484,7 +1552,7 @@ body{
       <div class="t-row" style="background:#FFFDF7;border-top:1px solid var(--line-light);">
         <div style="width:100%;padding:4px 0;grid-column:1/-1;">
           <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;font-weight:600;margin-bottom:6px;" data-i18n="table.note">Note</div>
-          <div contenteditable="true" spellcheck="false" style="font-size:13px;color:var(--gold);font-style:italic;outline:none;min-height:36px;border-bottom:1px dashed rgba(196,151,58,0.35);padding-bottom:4px;font-family:'Playfair Display',serif;">Add a note here...</div>
+          <div contenteditable="true" spellcheck="false" style="font-size:13px;color:var(--gold);font-style:italic;outline:none;min-height:36px;border-bottom:1px dashed rgba(196,151,58,0.35);padding-bottom:4px;font-family:'Playfair Display',serif;" id="noteField">Add a note here...</div>
         </div>
       </div>
     </div>
@@ -1611,6 +1679,14 @@ var TRANSLATIONS = {
     'pkgName.allon4': 'Premium All-on-4 Package',
     'pkgName.makeover': 'Premium Smile Makeover Package',
     'pkg.preparedFor': 'Prepared For',
+    'pkg.patientName': 'Patient Name',
+    'tier.heading': 'YOUR PACKAGE',
+    'tier.silver': 'Silver',
+    'tier.gold': 'Gold',
+    'tier.premium': 'Premium',
+    'note.placeholder': 'Add a note here...',
+    'journey.dur4': '3 nights / 4 days',
+    'journey.dur6': '5 nights / 6 days',
     'pkg.date': 'Date',
     'pkg.tableTitle': 'TREATMENT PLAN',
     'price.eyebrow': 'YOUR EXCLUSIVE PRICE',
@@ -1679,6 +1755,14 @@ var TRANSLATIONS = {
     'pkgName.allon4': 'Премиум пакет All-on-4',
     'pkgName.makeover': 'Премиум пакет преображения улыбки',
     'pkg.preparedFor': 'Подготовлено для',
+    'pkg.patientName': 'Имя пациента',
+    'tier.heading': 'ВАШ ПАКЕТ',
+    'tier.silver': 'Серебро',
+    'tier.gold': 'Золото',
+    'tier.premium': 'Премиум',
+    'note.placeholder': 'Добавьте заметку здесь...',
+    'journey.dur4': '3 ночи / 4 дня',
+    'journey.dur6': '5 ночей / 6 дней',
     'pkg.date': 'Дата',
     'pkg.tableTitle': 'ПЛАН ЛЕЧЕНИЯ',
     'price.eyebrow': 'ВАША ЭКСКЛЮЗИВНАЯ ЦЕНА',
@@ -1745,8 +1829,16 @@ var TRANSLATIONS = {
     'pkg.eyebrow': 'EKSKLUZYWNE CENY PAKIETÓW',
     'pkgName.allon6': 'Pakiet Premium All-on-6',
     'pkgName.allon4': 'Pakiet Premium All-on-4',
-    'pkgName.makeover': 'Pakiet Premium Smile Makeover',
+    'pkgName.makeover': 'Pakiet Premium Metamorfoza Uśmiechu',
     'pkg.preparedFor': 'Przygotowano dla',
+    'pkg.patientName': 'Imię pacjenta',
+    'tier.heading': 'TWÓJ PAKIET',
+    'tier.silver': 'Srebro',
+    'tier.gold': 'Złoto',
+    'tier.premium': 'Premium',
+    'note.placeholder': 'Dodaj notatkę tutaj...',
+    'journey.dur4': '3 noce / 4 dni',
+    'journey.dur6': '5 nocy / 6 dni',
     'pkg.date': 'Data',
     'pkg.tableTitle': 'PLAN LECZENIA',
     'price.eyebrow': 'TWOJA EKSKLUZYWNA CENA',
@@ -2469,6 +2561,8 @@ function toggleAO4Lower() {
 
 /* ===== PACKAGE NAME DROPDOWN ===== */
 function togglePkgMenu(e){ e.stopPropagation(); document.getElementById('pkgMenu').classList.toggle('open'); }
+function pkgNameEdited(){ var n=document.getElementById('pkgName'); if(n) n.removeAttribute('data-pkg-key'); }
+function pickTier(el){ document.querySelectorAll('#pkTiers .pk-tier').forEach(function(t){ t.classList.remove('selected'); }); el.classList.add('selected'); }
 function pickPkg(el){
   var n=document.getElementById('pkgName');
   n.textContent = el.textContent;
@@ -2483,6 +2577,10 @@ function applyTranslations(lang){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var k = el.getAttribute('data-i18n');
     if (dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if (dict[k] !== undefined) el.innerHTML = dict[k];
   });
   document.querySelectorAll('.t-name-select').forEach(function(sel){
     var key = sel.getAttribute('data-opt-key');
@@ -2503,6 +2601,22 @@ function applyTranslations(lang){
     var k = s.getAttribute('data-pkg-key');
     if (dict['pkgName.'+k] !== undefined) s.textContent = dict['pkgName.'+k];
   });
+  // Editable placeholder fields: translate ONLY if still showing a default (don't wipe typed input)
+  (function(){
+    var nameEl=document.getElementById('pkName');
+    var nameDefs=['Patient Name','Имя пациента','Imię pacjenta'];
+    if(nameEl && nameDefs.indexOf((nameEl.textContent||'').trim())>=0 && dict['pkg.patientName']) nameEl.textContent=dict['pkg.patientName'];
+    var note=document.getElementById('noteField');
+    var noteDefs=['Add a note here...','Добавьте заметку здесь...','Dodaj notatkę tutaj...'];
+    if(note && noteDefs.indexOf((note.textContent||'').trim())>=0 && dict['note.placeholder']) note.textContent=dict['note.placeholder'];
+    var d4=['3 nights / 4 days','3 ночи / 4 дня','3 noce / 4 dni'];
+    var d6=['5 nights / 6 days','5 ночей / 6 дней','5 nocy / 6 dni'];
+    document.querySelectorAll('.tl-dur').forEach(function(el){
+      var t=(el.textContent||'').trim();
+      if(d4.indexOf(t)>=0 && dict['journey.dur4']) el.textContent=dict['journey.dur4'];
+      else if(d6.indexOf(t)>=0 && dict['journey.dur6']) el.textContent=dict['journey.dur6'];
+    });
+  })();
   if (typeof updateTreatmentLabel === 'function') updateTreatmentLabel();
 }
 function setLanguage(lang){
@@ -2524,6 +2638,11 @@ document.addEventListener('click', function(){
     var d=document.getElementById('pkDate');
     if(!d) return;
     d.addEventListener('focus', function(){ if(/[DMYdmy]/.test(d.textContent)) d.textContent=''; });
+  var pn=document.getElementById('pkName');
+  if(pn){ pn.addEventListener('focus',function(){ var defs=['Patient Name','Имя пациента','Imię pacjenta']; if(defs.indexOf((pn.textContent||'').trim())>=0) pn.textContent=''; }); }
+  var nf=document.getElementById('noteField');
+  if(nf){ nf.addEventListener('focus',function(){ var defs=['Add a note here...','Добавьте заметку здесь...','Dodaj notatkę tutaj...']; if(defs.indexOf((nf.textContent||'').trim())>=0) nf.textContent=''; }); }
+
     d.addEventListener('input', function(){
       var v=d.textContent.replace(/\D/g,'').slice(0,8), out=v;
       if(v.length>4) out=v.slice(0,2)+'.'+v.slice(2,4)+'.'+v.slice(4);
